@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\User;
-use App\Hasher;
+use App\UserToken;
+
+
+use Illuminate\Support\Str;
 /**
  * @group User Endpoint
  * 
@@ -15,6 +18,12 @@ use App\Hasher;
 class UserController extends Controller
 {
     //
+    public $token;
+
+    public function __construct() {
+        $this->token = new UserToken();
+    }
+
     /**
      * 
      * Authorized User Account
@@ -47,15 +56,17 @@ class UserController extends Controller
      * 
      * Headers: Bearer Token
      * 
-     * @queryParams id required
-     * @queryParams hash required
+     * @queryParams token required
      * 
      */
-      public function verify(Request $request) {
+      public function verify(Request $request, $token = null) {
         if($request->user()->hasVerifiedEmail()) {
             return response()->json(['message' => 'User already verified.'], 422);
         }
+        $token = $this->token->getVerifyToken($token);
+        if(!$token) return response()->json(['message' => 'Verification token is invalid.'], 422);
         $request->user()->markEmailAsVerified();
+        $this->token->delete($token);
         return response()->json(['message' => 'User has been verified'], 200);
     }
 

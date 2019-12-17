@@ -35,7 +35,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"firstName":"illo","lastName":"enim","email":"aperiam","password":"consequuntur","gender":"laborum","birthDate":"dolor","watsappNumber":"illum","phoneNumber":"consequatur","passportNumber":"suscipit","visaNumber":"magni","accessCardNumber":"magnam"}'
+    -d '{"firstName":"saepe","lastName":"id","email":"voluptatibus","password":"ad","gender":"odit","birthDate":"accusamus","watsappNumber":"accusantium","phoneNumber":"itaque","passportNumber":"placeat","visaNumber":"aut","accessCardNumber":"excepturi"}'
 
 ```
 
@@ -51,17 +51,17 @@ let headers = {
 };
 
 let body = {
-    "firstName": "illo",
-    "lastName": "enim",
-    "email": "aperiam",
-    "password": "consequuntur",
-    "gender": "laborum",
-    "birthDate": "dolor",
-    "watsappNumber": "illum",
-    "phoneNumber": "consequatur",
-    "passportNumber": "suscipit",
-    "visaNumber": "magni",
-    "accessCardNumber": "magnam"
+    "firstName": "saepe",
+    "lastName": "id",
+    "email": "voluptatibus",
+    "password": "ad",
+    "gender": "odit",
+    "birthDate": "accusamus",
+    "watsappNumber": "accusantium",
+    "phoneNumber": "itaque",
+    "passportNumber": "placeat",
+    "visaNumber": "aut",
+    "accessCardNumber": "excepturi"
 }
 
 fetch(url, {
@@ -106,7 +106,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"email":"corrupti","password":"et"}'
+    -d '{"email":"qui","password":"deserunt"}'
 
 ```
 
@@ -122,8 +122,8 @@ let headers = {
 };
 
 let body = {
-    "email": "corrupti",
-    "password": "et"
+    "email": "qui",
+    "password": "deserunt"
 }
 
 fetch(url, {
@@ -161,7 +161,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"email":"ex","recaptcha_token":"hic"}'
+    -d '{"email":"velit","recaptcha_token":"temporibus"}'
 
 ```
 
@@ -177,8 +177,8 @@ let headers = {
 };
 
 let body = {
-    "email": "ex",
-    "recaptcha_token": "hic"
+    "email": "velit",
+    "recaptcha_token": "temporibus"
 }
 
 fetch(url, {
@@ -204,13 +204,13 @@ Parameter | Type | Status | Description
 <!-- END_d04d24f054d5e9436595ea3b48d9e2ec -->
 
 <!-- START_0859a2d46aa85acc2aec51066feb9ff2 -->
-## Get User By Reset Password Link
+## Generate Reset Password Link
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/v1/auth/reset-password/1?token=et" \
+    -G "http://localhost/api/v1/auth/reset-password/1?token=iure" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"
@@ -222,7 +222,7 @@ const url = new URL(
 );
 
 let params = {
-    "token": "et",
+    "token": "iure",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
@@ -242,11 +242,11 @@ fetch(url, {
 ```
 
 
-> Example response (200):
+> Example response (422):
 
 ```json
 {
-    "data": []
+    "message": "Token has been expired"
 }
 ```
 
@@ -260,46 +260,6 @@ Parameter | Status | Description
     `token` |  required  | 
 
 <!-- END_0859a2d46aa85acc2aec51066feb9ff2 -->
-
-<!-- START_7f6cbeffca329e54a9739d1483633350 -->
-## Save Password with Token
-
-> Example request:
-
-```bash
-curl -X PUT \
-    "http://localhost/api/v1/auth/reset-password/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -H "Authorization: Bearer {token}"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/api/v1/auth/reset-password/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer {token}",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`PUT api/v1/auth/reset-password/{token}`
-
-
-<!-- END_7f6cbeffca329e54a9739d1483633350 -->
 
 #User Endpoint
 
@@ -402,7 +362,7 @@ fetch(url, {
 
 <!-- END_f10bec866a6f1eae832af7ed79b5545a -->
 
-<!-- START_96c17870911ecf72e52111d644d9827e -->
+<!-- START_c518b7cb0b380f55e8d8e2fce75cf440 -->
 ## Verify User Account
 
 Headers: Bearer Token
@@ -411,7 +371,7 @@ Headers: Bearer Token
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/v1/user/verify/1/1" \
+    -G "http://localhost/api/v1/user/verify/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"
@@ -419,7 +379,7 @@ curl -X GET \
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/v1/user/verify/1/1"
+    "http://localhost/api/v1/user/verify/1"
 );
 
 let headers = {
@@ -446,10 +406,10 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`GET api/v1/user/verify/{id}/{hash}`
+`GET api/v1/user/verify/{token}`
 
 
-<!-- END_96c17870911ecf72e52111d644d9827e -->
+<!-- END_c518b7cb0b380f55e8d8e2fce75cf440 -->
 
 <!-- START_dd3d5501615121fcb8ef0f5ced2a1ecd -->
 ## Get User By ID
@@ -458,7 +418,7 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/v1/user/1?id=tenetur" \
+    -G "http://localhost/api/v1/user/1?id=quia" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"
@@ -470,7 +430,7 @@ const url = new URL(
 );
 
 let params = {
-    "id": "tenetur",
+    "id": "quia",
 };
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));

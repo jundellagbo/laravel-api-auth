@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePasswordTokenizer extends Migration
+class CreateTokenizer extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreatePasswordTokenizer extends Migration
      */
     public function up()
     {
-        Schema::create('password_tokenizer', function (Blueprint $table) {
+        Schema::create('tokenizer', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('token');
             $table->string('email');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreatePasswordTokenizer extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_tokenizer');
+        Schema::dropIfExists('tokenizer');
     }
 }

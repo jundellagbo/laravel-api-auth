@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PasswordTokenizer extends Model
+class Tokenizer extends Model
 {
     //
-    protected $table = "password_tokenizer";
+    protected $table = "tokenizer";
 
     protected $fillable = [
-        'token', 'email'
+        'token', 'email', 'type'
     ];
 }

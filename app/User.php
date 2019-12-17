@@ -7,10 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-use App\Mail\ResetPassword;
-use App\Mail\EmailVerification;
 use App\Hasher;
-use Mail;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -47,15 +44,5 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getXuuidAttribute() {
         return Hasher::encode($this->id);
-    }
-
-    // reset password notification
-    public function sendPasswordResetNotification($token) {
-        Mail::to([
-            [
-                'email' => $this->email,
-                'subject' => 'Reset Password'
-            ]
-        ])->send(new ResetPassword([ 'token' => $token ]));
     }
 }

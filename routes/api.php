@@ -41,10 +41,12 @@ Route::prefix('v1')->group(function() {
             // Resend Verification Email
             Route::get('/verify/resend', 'v1\UserController@resendVerification');
             // Verify User
-            Route::get('/verify/{id}/{hash}', 'v1\UserController@verify');
+            Route::get('/verify/{token}', 'v1\UserController@verify');
         });
     });
 
     // Public
     Route::get('/user/{id}', 'v1\UserController@userId');
+
+    Route::get('/test', 'v1\UserController@testing');
 });

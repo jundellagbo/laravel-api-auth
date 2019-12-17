@@ -59,7 +59,7 @@
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"firstName":"illo","lastName":"enim","email":"aperiam","password":"consequuntur","gender":"laborum","birthDate":"dolor","watsappNumber":"illum","phoneNumber":"consequatur","passportNumber":"suscipit","visaNumber":"magni","accessCardNumber":"magnam"}'
+    -d '{"firstName":"saepe","lastName":"id","email":"voluptatibus","password":"ad","gender":"odit","birthDate":"accusamus","watsappNumber":"accusantium","phoneNumber":"itaque","passportNumber":"placeat","visaNumber":"aut","accessCardNumber":"excepturi"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/auth/register"
@@ -72,17 +72,17 @@ let headers = {
 };
 
 let body = {
-    "firstName": "illo",
-    "lastName": "enim",
-    "email": "aperiam",
-    "password": "consequuntur",
-    "gender": "laborum",
-    "birthDate": "dolor",
-    "watsappNumber": "illum",
-    "phoneNumber": "consequatur",
-    "passportNumber": "suscipit",
-    "visaNumber": "magni",
-    "accessCardNumber": "magnam"
+    "firstName": "saepe",
+    "lastName": "id",
+    "email": "voluptatibus",
+    "password": "ad",
+    "gender": "odit",
+    "birthDate": "accusamus",
+    "watsappNumber": "accusantium",
+    "phoneNumber": "itaque",
+    "passportNumber": "placeat",
+    "visaNumber": "aut",
+    "accessCardNumber": "excepturi"
 }
 
 fetch(url, {
@@ -184,7 +184,7 @@ fetch(url, {
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"email":"corrupti","password":"et"}'
+    -d '{"email":"qui","password":"deserunt"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/auth/login"
@@ -197,8 +197,8 @@ let headers = {
 };
 
 let body = {
-    "email": "corrupti",
-    "password": "et"
+    "email": "qui",
+    "password": "deserunt"
 }
 
 fetch(url, {
@@ -247,7 +247,7 @@ fetch(url, {
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}" \
-    -d '{"email":"ex","recaptcha_token":"hic"}'
+    -d '{"email":"velit","recaptcha_token":"temporibus"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/v1/auth/request-reset-password"
@@ -260,8 +260,8 @@ let headers = {
 };
 
 let body = {
-    "email": "ex",
-    "recaptcha_token": "hic"
+    "email": "velit",
+    "recaptcha_token": "temporibus"
 }
 
 fetch(url, {
@@ -298,12 +298,12 @@ fetch(url, {
 </table>
 <!-- END_d04d24f054d5e9436595ea3b48d9e2ec -->
 <!-- START_0859a2d46aa85acc2aec51066feb9ff2 -->
-<h2>Get User By Reset Password Link</h2>
+<h2>Generate Reset Password Link</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/auth/reset-password/1?token=et" \
+    -G "http://localhost/api/v1/auth/reset-password/1?token=iure" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -312,7 +312,7 @@ fetch(url, {
 );
 
 let params = {
-    "token": "et",
+    "token": "iure",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -330,10 +330,10 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (422):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "data": []
+    "message": "Token has been expired"
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/v1/auth/reset-password/{token}</code></p>
@@ -354,35 +354,6 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_0859a2d46aa85acc2aec51066feb9ff2 -->
-<!-- START_7f6cbeffca329e54a9739d1483633350 -->
-<h2>Save Password with Token</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X PUT \
-    "http://localhost/api/v1/auth/reset-password/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -H "Authorization: Bearer {token}"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/auth/reset-password/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer {token}",
-};
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>PUT api/v1/auth/reset-password/{token}</code></p>
-<!-- END_7f6cbeffca329e54a9739d1483633350 -->
 <h1>User Endpoint</h1>
 <!-- START_86440747441f391a588ff9c6441c5de4 -->
 <h2>Authorized User Account</h2>
@@ -456,19 +427,19 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET api/v1/user/verify/resend</code></p>
 <!-- END_f10bec866a6f1eae832af7ed79b5545a -->
-<!-- START_96c17870911ecf72e52111d644d9827e -->
+<!-- START_c518b7cb0b380f55e8d8e2fce75cf440 -->
 <h2>Verify User Account</h2>
 <p>Headers: Bearer Token</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/user/verify/1/1" \
+    -G "http://localhost/api/v1/user/verify/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/user/verify/1/1"
+    "http://localhost/api/v1/user/verify/1"
 );
 
 let headers = {
@@ -490,15 +461,15 @@ fetch(url, {
     "message": "Unauthenticated."
 }</code></pre>
 <h3>HTTP Request</h3>
-<p><code>GET api/v1/user/verify/{id}/{hash}</code></p>
-<!-- END_96c17870911ecf72e52111d644d9827e -->
+<p><code>GET api/v1/user/verify/{token}</code></p>
+<!-- END_c518b7cb0b380f55e8d8e2fce75cf440 -->
 <!-- START_dd3d5501615121fcb8ef0f5ced2a1ecd -->
 <h2>Get User By ID</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/api/v1/user/1?id=tenetur" \
+    -G "http://localhost/api/v1/user/1?id=quia" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {token}"</code></pre>
@@ -507,7 +478,7 @@ fetch(url, {
 );
 
 let params = {
-    "id": "tenetur",
+    "id": "quia",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
